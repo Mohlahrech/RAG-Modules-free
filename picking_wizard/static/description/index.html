@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Picking wizard</title>
+    <title>Picking Wizard - Odoo App</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,23 +21,29 @@
         }
         .header .logo {
             height: 50px;
+            margin-right: 20px; /* Space between logo and title */
         }
-        .header .phone {
+        .header .title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #800080;
+        }
+        .header .contact-info {
             background-color: #800080;
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
-            font-size: 20px;
-            font-weight: bold;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+        }
+        .header .contact-info img {
+            height: 20px;
+            margin-right: 5px;
         }
         .content {
             padding: 20px;
             text-align: center;
-        }
-        .title {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 20px;
         }
         .description {
             font-size: 20px;
@@ -56,6 +62,7 @@
             font-size: 20px;
             display: inline-block;
             margin-bottom: 20px;
+            transition: background-color 0.3s;
         }
         .demo-button:hover {
             background-color: #6a1b9a;
@@ -80,6 +87,7 @@
             text-decoration: none;
             font-size: 24px;
             font-weight: bold;
+            transition: background-color 0.3s;
         }
         .final-block .get-demo-button:hover {
             background-color: #6a1b9a;
@@ -88,40 +96,43 @@
 </head>
 <body>
     <div class="header">
-        <div>
-            <div class="title">Picking wizard</div>
+        <div style="display: flex; align-items: center;">
+            <img src="icon.png" alt="Company Logo" class="logo">
+            <div class="title">Picking Wizard</div>
         </div>
-        <div class="phone">
+        <div class="contact-info">
             <strong>Contact the Developer:</strong>
-            <img src="whatsapp.png" alt="WhatsApp" style="height: 20px; vertical-align: middle;">
+            <img src="whatsapp.png" alt="WhatsApp">
             +213 555 78 21 74
+            <img src="linkedin.png" alt="LinkedIn">
+            <a href="https://www.linkedin.com/in/mohamed-lahrech-787936172/" style="color: white; text-decoration: none;">LinkedIn</a>
         </div>
     </div>
 
     <div class="content">
-        <br><br>
         <div class="description">
-            This module allows you to edit the picking lines using a wizard in the list view without opening the record.
+            This module allows you to edit the picking lines using a wizard in the list view without opening the record. Enhance your workflow with this intuitive tool!
         </div>
 
-        <br><br>
         <div class="image-block">
-            <img src="menu.png" alt="Menu">
+            <img src="menu.png" alt="Menu Interface">
         </div>
         <div class="image-block">
-            <img src="tree.png" alt="Tree View">
+            <img src="tree.png" alt="Tree View of Pickings">
         </div>
         <div class="image-block">
-            <img src="wizard.png" alt="Wizard Step 1">
+            <img src="wizard.png" alt="Wizard Step 1 - Edit Picking Lines">
         </div>
         <div class="image-block">
-            <img src="wizard 2.png" alt="Wizard Step 2">
+            <img src="wizard 2.png" alt="Wizard Step 2 - Confirm Changes">
         </div>
         <div class="image-block">
-            <img src="result.png" alt="Result">
+            <img src="result.png" alt="Result of Picking Wizard">
         </div>
-        <br><br>
 
+        <div class="final-block">
+            <a href="#" class="get-demo-button">Download it for free!</a>
+        </div>
     </div>
 </body>
 </html>

@@ -1,0 +1,21 @@
+<odoo>
+  <data>
+    <record id="view_stock_picking_tree_inherit_split_wizard" model="ir.ui.view">
+      <field name="name">stock.picking.tree.inherit.split.wizard</field>
+      <field name="model">stock.picking</field>
+      <field name="inherit_id" ref="stock.vpicktree"/>
+      <field name="arch" type="xml">
+        <!-- Add a column to the tree view for the button -->
+        <xpath expr="//field[@name='name']" position="after">
+          <button name="open_split_wizard"
+                  type="object"
+                  string="Set quantities"
+                  class="btn-primary"
+                  icon="fa-split"
+                  invisible="state in ('done','cancel')"
+          />
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

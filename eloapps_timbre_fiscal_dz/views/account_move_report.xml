@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+        <template id="report_invoice_document_timbre" inherit_id="account.report_invoice_document">
+
+            <xpath expr="//div[@class='clearfix mb-4']" position="after">
+                <table class="table table-sm" style="page-break-inside: avoid;">
+                    <tr class="border-black o_total">
+
+                        <t t-if="o.payment_mode_type == 'cash'">
+                            <td><strong>Droit de timbre </strong></td>
+                            <td class="text-right">
+                                <span t-field="o.amount_timbre"/>
+                            </td>
+                        </t>
+
+                        <t t-if="o.payment_mode_supplier == 'cash'">
+                            <td><strong>Droit de timbre </strong></td>
+                            <td class="text-right">
+                                <span t-field="o.amount_timbre_supplier"/>
+                            </td>
+                        </t>
+                    </tr>
+
+                    <tr class="border-black o_total">
+                        <t t-if="o.payment_mode_type == 'cash' or o.payment_mode_supplier == 'cash'">
+                            <td><strong>Total TTC avec timbre :</strong></td>
+                            <td class="text-right">
+                                <span t-field="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </t>
+                    </tr>
+
+<!--                    <tr class="border-black o_total">-->
+<!--                        <t t-if="o.payment_mode_type != 'cash'">-->
+<!--                            <td><strong>Total TTC </strong></td>-->
+<!--                            <td class="text-right">-->
+<!--                                <span t-field="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>-->
+<!--                            </td>-->
+<!--                        </t>-->
+<!--                    </tr>-->
+                </table>
+                <p t-if="o.montant_en_lettre" name="total_en_lettre">
+                    Montant à payer en lettre : <b><span t-esc="o.custom_amount_to_text(o.amount_total)" /></b>
+                </p>
+            </xpath>
+        </template>
+            
+           
+    </data>
+
+</odoo>

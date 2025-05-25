@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Inherit the base template report_invoice_document -->
+    <template id="custom_report_invoice_documendt" inherit_id="account.report_invoice_document">
+
+        <!-- Use XPath to locate the position to add your field -->
+        <xpath expr="//div[@class='mt-5']" position="before">
+
+              <!--Ajouter les Données Fiscales du clients -->
+                <div style="font-size: 15px; text-align: right;"> <!-- Adjust text-align: right; -->
+                    <ul class="list-inline mb4" style="margin-top: 20px; display: inline-block;"> <!-- Add display: inline-block; -->
+                        <li t-if="o.partner_id.nrc" style="display: block; margin-bottom: 10px; padding-right: 215px;"> <!-- Adjust padding-right: 20px; -->
+                            N° RC :
+                            <span t-field="o.partner_id.nrc"/>
+                        </li>
+
+                        <li t-if="o.partner_id.nif" style="display: block; margin-bottom: 10px; padding-right: 215px;"> <!-- Adjust padding-right: 20px; -->
+                            NIF :
+                            <span t-field="o.partner_id.nif"/>
+                        </li>
+
+                        <li t-if="o.partner_id.ai" style="display: block; margin-bottom: 10px; padding-right: 215px;"> <!-- Adjust padding-right: 20px; -->
+                            AI :
+                            <span t-field="o.partner_id.ai"/>
+                        </li>
+
+                        <li t-if="o.partner_id.nis" style="display: block; margin-bottom: 10px; padding-right: 215px;"> <!-- Adjust padding-right: 20px; -->
+                            NIS :
+                            <span t-field="o.partner_id.nis"/>
+                        </li>
+                    </ul>
+                </div>
+
+
+
+
+
+        </xpath>
+
+    </template>
+</odoo>
+

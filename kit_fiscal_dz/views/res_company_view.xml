@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_company_form_id_fiscal" model="ir.ui.view">
+            <field name="name">res.company.form.id.fiscal</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <!-- Ajout des données fiscales-->
+                <xpath expr="//field[@name='company_registry']" position="after">
+                    <field name="nrc"/>
+                    <field name="nif"/>
+                    <field name="ai"/>
+                    <field name="nis"/>
+                    <field name="forme_juridique_company"/>
+                    <field name="capital_social" widget="monetary"/>
+                    <field name="activity"/>
+                </xpath>
+
+                <!-- Ajout field fax after phone-->
+                <xpath expr="//field[@name='phone']" position="after">
+                    <field name="fax" widget="phone"/>
+                </xpath>
+
+                <!--Mettre les champs vat & company_registry invisible-->
+                <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_registry']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+
+                <!--Wilaya au lieu de state name -->
+                <xpath expr="//field[@name='state_id']" position="attributes">
+                    <attribute name="placeholder">Wilaya</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

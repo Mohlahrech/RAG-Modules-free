@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="1">
+		
+		<record id="forme_juridique_sarl" model="forme.juridique">
+			<field name="name">SARL</field>
+			<field name="code">SARL</field>
+		</record>
+		<record id="forme_juridique_eurl" model="forme.juridique">
+			<field name="name">EURL</field>
+			<field name="code">EURL</field>
+		</record>
+
+		<record id="forme_juridique_spa" model="forme.juridique">
+			<field name="name">SPA</field>
+			<field name="code">SPA</field>
+		</record>
+
+		<record id="forme_juridique_ets" model="forme.juridique">
+			<field name="name">ETS</field>
+			<field name="code">ETS</field>
+		</record>
+
+		<record id="forme_juridique_sa" model="forme.juridique">
+			<field name="name">SA</field>
+			<field name="code">SA</field>
+		</record>
+		
+	</data>
+</odoo>

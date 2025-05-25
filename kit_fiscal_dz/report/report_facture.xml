@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="invoice_pdr_report" model="ir.actions.report">
+            <field name="name">Facture Conforme</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">kit_fiscal_dz.report_invoice_pdr</field>
+            <field name="report_file">kit_fiscal_dz.report_invoice_pdr</field>
+            <field name="print_report_name">'Facture'</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

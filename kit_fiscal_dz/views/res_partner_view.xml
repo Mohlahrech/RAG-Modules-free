@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_partner_form_id_fiscal" model="ir.ui.view">
+            <field name="name">res.partner.form.id.fiscal</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <page name="internal_notes" position="after">
+                    <page string="Informations Fiscales" name="informations_fiscales">
+                        <group name="container_row_2">
+                            <field name="property_account_position_id" options="{'no_edit' : True, 'no_create': True}"/>
+                            <field name="nrc"/>
+                            <field name="nif"/>
+                            <field name="ai"/>
+                            <field name="nis"/>
+                        </group>
+                    </page>
+                </page>
+                <xpath expr="//field[@name='user_ids']" position="before">
+                    <field name="fax" widget="phone"/>
+                </xpath>
+                <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//div[@class='o_address_format']/field[@name='state_id']" position="attributes">
+                    <attribute name="placeholder">Wilaya</attribute>
+                </xpath>
+
+            </field>
+
+        </record>
+
+        <record id="account_view_partner_property_form_inherit" model="ir.ui.view">
+            <field name="name">account.view.partner.property.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='fiscal_information']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

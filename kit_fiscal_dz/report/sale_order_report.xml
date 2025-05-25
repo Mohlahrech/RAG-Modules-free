@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Sale Order Report -->
+        <template id="sale_report_amount_inherit_inherit" inherit_id="sale.report_saleorder_document">
+            <!-- Ajouter les données  du clients -->
+            <xpath expr="//t[@t-set='address']" position="replace">
+
+                <div style="padding-top:10px; font-size:15px; text-align: left" class="text">
+
+                    <!--                    Client Name-->
+                    <div>
+                        <strong>
+                            <span t-field="doc.partner_id.name"/>
+                        </strong>
+                    </div>
+
+                    <!--                    Client Street-->
+                    <div>
+                        <span t-field="doc.partner_id.street"/>
+                    </div>
+                    <div>
+                        <span t-field="doc.partner_id.street2"/>
+                    </div>
+                    <div>
+                        <span t-field="doc.partner_id.zip"/>
+                        <span t-field="doc.partner_id.city"/>
+                        <span t-if="doc.partner_id.state_id">(<span t-field="doc.partner_id.state_id"/>)
+                            <span t-if="doc.partner_id.country_id">,</span>
+                        </span>
+                        <span t-field="doc.partner_id.country_id"/>
+                    </div>
+
+                    <!--                    Client Phone-->
+                    <div>
+                        <ul class="list-inline mb4">
+                            <li t-if="doc.partner_id.phone" style="display:inline-block;">
+                                Tél:
+                                <span t-field="doc.partner_id.phone"/>
+                            </li>
+
+                            <li t-if="doc.partner_id.mobile" style="display:inline-block;">
+                                Mobile:
+                                <span t-field="doc.partner_id.mobile"/>
+                            </li>
+
+                            <li t-if="doc.partner_id.fax" style="display:inline-block;">
+                                Fax:
+                                <span t-field="doc.partner_id.fax"/>
+                            </li>
+                        </ul>
+                    </div>
+                         <!-- Ajouter les Données Fiscales -->
+                    <div style="margin-top: 20px; text-align: left;">
+                        <ul class="list-inline mb4">
+                            <li t-if="doc.partner_id.nrc" style="display:inline-block; margin-right: 10px;">
+                                N° RC :
+                                <span t-field="doc.partner_id.nrc"/>
+                            </li>
+                            <li t-if="doc.partner_id.nif" style="display:inline-block; margin-right: 10px;">
+                                NIF :
+                                <span t-field="doc.partner_id.nif"/>
+                            </li>
+                            <li t-if="doc.partner_id.ai" style="display:inline-block; margin-right: 10px;">
+                                AI :
+                                <span t-field="doc.partner_id.ai"/>
+                            </li>
+                            <li t-if="doc.partner_id.nis" style="display:inline-block; margin-right: 10px;">
+                                NIS :
+                                <span t-field="doc.partner_id.nis"/>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                
+            </xpath>
+        </template>
+         <!-- Inherit the template -->
+        <template id="sale_order_portal_content_inherited" inherit_id="sale.sale_order_portal_content">
+            <xpath expr="//div[@id='invoicing_shipping_address']" position="after">
+                <!-- Add your custom code here -->
+                <div>
+                      <!-- Add the "nrc" field here -->
+                    <span><strong>NRC:</strong> <span t-field="sale_order.partner_invoice_id.nrc"/></span>
+
+                    <!-- Add the "nif" field here -->
+                    <span><strong>NIF:</strong> <span t-field="sale_order.partner_invoice_id.nif"/></span>
+
+                    <!-- Add the "ai" field here -->
+                    <span><strong>AI:</strong> <span t-field="sale_order.partner_invoice_id.ai"/></span>
+
+                    <!-- Add the "nis" field here -->
+                    <span><strong>NIS:</strong> <span t-field="sale_order.partner_invoice_id.nis"/></span>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>

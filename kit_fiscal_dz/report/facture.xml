@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Invoice Page Content (No Header/Footer) -->
+        <template id="report_invoice_page_content">
+            <div class="page" style="margin: 0; padding: 0; font-family: OpelFont;">
+                <!-- REMOVED Custom Header -->
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="col-6" style="float: left;font-weight: bold;">
+                            <!-- Company Info (External layout handles logo/name now) -->
+<!--                            <div class="row">Entreprise: Eurl The Success Agency</div>-->
+                            <div class="row">Entreprise: <span t-esc="o.company_id.name"/></div>
+<!--                            <div class="row">Activité: <span style="margin-left: 5px">Agence de publicité</span></div>-->
+                            <div class="row">Activité: <span t-esc="o.company_id.activity"/></div>
+                            <div class="row">Adresse : <span t-esc="o.company_id.street"/></div>
+                            <div class="row">
+                                <span t-field="o.company_id.street2"/>
+                                <span t-field="o.company_id.state_id"/>
+                            </div>
+                            <div class="separator"
+                                 style="align-items: center;border-bottom: 2px solid black; margin-bottom: 10px;width:50%;"></div>
+                            <div class="row">NIF: <span t-field="o.company_id.nif"/></div>
+                            <div class="row">NIS: <span t-field="o.company_id.nis"/></div>
+                            <div class="row">Article d'Imposition: <span t-field="o.company_id.ai"/></div>
+                            <div class="row">Registre de Commerce: <span t-field="o.company_id.nrc"/></div>
+                            <br/>
+                            <h3>
+                                <t t-if="o.move_type == 'out_refund'">
+                                    <strong>Avoir N° <span t-field="o.name"/></strong>
+                                </t>
+                                <t t-else="">
+                                    <strong>Facture N° <span t-field="o.name"/></strong>
+                                </t>
+                            </h3>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-4" style="float: right;font-weight: bold;">
+                            <div class="row">Client: <span t-field="o.partner_id.name"/></div>
+                            <div class="row">Activité: <span t-field="o.partner_id.activity_conforme"/></div>
+                            <div class="row">Adresse de facturation et de livraison :</div>
+                            <div class="row">
+                                <span t-field="o.partner_id.street"/>
+                                <span t-field="o.partner_id.city"/>
+                            </div>
+                            <div class="row">
+                                <span t-field="o.partner_id.state_id.name"/>
+                                <span t-field="o.partner_id.zip"/>
+                                <span t-field="o.partner_id.country_id.name"/>
+                            </div>
+                            <t t-if="o.partner_id.phone and o.partner_id.mobile">
+                                <div class="row"><span t-field="o.partner_id.phone"/>/
+                                    <span t-field="o.partner_id.mobile"/>
+                                </div>
+                            </t>
+                            <t t-if="o.partner_id.phone and not o.partner_id.mobile">
+                                <span t-field="o.partner_id.phone"/>
+                            </t>
+                            <t t-if="o.partner_id.mobile and not o.partner_id.phone">
+                                <span t-field="o.partner_id.mobile"/>
+                            </t>
+<!--                            <t t-if="o.partner_id.company_type == 'company'">-->
+                            <t>
+                                <div class="row" t-if="o.partner_id.nif">NIF: <span t-field="o.partner_id.nif"/></div>
+                                <div class="row" t-if="o.partner_id.nis">NIS: <span t-field="o.partner_id.nis"/></div>
+                                <div class="row" t-if="o.partner_id.ai">AI: <span t-field="o.partner_id.ai"/></div>
+                                <div class="row" t-if="o.partner_id.nrc">RC: <span t-field="o.partner_id.nrc"/></div>
+                            </t>
+<!--                            <t t-if="o.partner_id.company_type == 'person'">-->
+<!--                                <div class="row" style="width:100%;">Identité Nationale <span t-field="o.partner_id.id_nat"/></div>-->
+<!--                            </t>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4 mb-4" id="informations">
+                    <div class="d-flex flex-wrap">
+                        <div class="col-auto mw-100 mb-2" t-if="o.sale_order_id">
+                            <strong>N commande:</strong>
+                            <p t-if="o.purchase_id" class="m-0" t-field="o.purchase_id.name"/>
+                            <p t-elif="o.sale_order_id" class="m-0" t-field="o.sale_order_id.name"/>
+                        </div>
+                        <div class="col-auto mw-100 mb-2" name="informations_date">
+                            <strong>Date :</strong>
+                            <p class="m-0" t-field="o.invoice_date" t-options='{"widget": "date"}'/>
+                        </div>
+                        <!--                        <div class="col-auto mw-100 mb-2" name="informations_bl" t-if="doc.ref_bl_pdr">-->
+                        <!--                            <strong>Réference BL :</strong>-->
+                        <!--                            <t t-if="doc.pdr_ok">-->
+                        <!--                            <p class="m-0" t-field="doc.ref_bl_pdr"/>-->
+                        <!--                            </t>-->
+                        <!--                            <t t-else="">-->
+                        <!--                                 <p class="m-0" t-field="doc.picking_ingoing"/>-->
+                        <!--                            </t>-->
+                        <!--                        </div>-->
+                        <!--                        <t t-if="doc.pdr_ok">-->
+                        <!--                            <div class="col-auto mw-100 mb-2">-->
+                        <!--                                <strong>Chargé Client:</strong>-->
+                        <!--                                <p class="m-0" t-field="doc.user_id.name"/>-->
+                        <!--                            </div>-->
+                        <!--                        </t>-->
+                        <!--                        <div class="col-auto mw-100 mb-2" t-if="doc.partner_id.parent_id.ref">-->
+                        <!--                            <strong>Dealer Number:</strong>-->
+                        <!--                            <p class="m-0" t-field="doc.partner_id.parent_id.ref"/>-->
+                        <!--                        </div>-->
+                        <!-- Uncomment if needed
+                        <div t-if="doc.invoice_payment_term_id.name" class="col-auto mw-100 mb-2">
+                            <strong>Conditions de paiement:</strong>
+                            <p class="m-0" t-field="doc.invoice_payment_term_id.name"/>
+                        </div>
+                        -->
+                    </div>
+                </div>
+                <div>
+                    <table class="table table-condensed" style="font-size: 13px; margin-top: 10px; border: 1px solid black; border-collapse: collapse; width: 100%;"> <!-- Increased font-size -->
+                        <thead>
+                            <tr>
+                                <th class="text-left" style="color: #D35400; border: 1px solid black; padding: 6px;">REFERENCE</th> <!-- Increased padding -->
+                                <th class="text-left" style="color: #D35400; border: 1px solid black; padding: 6px;">DESIGNATION</th>
+                                <th class="text-left" style="color: #D35400; border: 1px solid black; padding: 6px;">PRIX UNITAIRE</th>
+                                <th class="text-left" style="color: #D35400; border: 1px solid black; padding: 6px;">TAXES</th>
+                                <th class="text-left" style="color: #D35400; border: 1px solid black; padding: 6px;">QUANTITE</th>
+                                <th class="text-left" style="color: #D35400; border: 1px solid black; padding: 6px;">UNITÉ</th>
+                                <th class="text-left" style="color: #D35400; border: 1px solid black; padding: 6px;">PRIX HORS TAXE</th>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody">
+                            <t t-foreach="o.invoice_line_ids" t-as="line">
+                                <tr>
+                                    <td style="border: 1px solid black; padding: 6px;"> <!-- Increased padding -->
+                                        <span t-field="line.product_id.default_code"/>
+                                    </td>
+                                    <td style="border: 1px solid black; padding: 6px;">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <td style="border: 1px solid black; padding: 6px;">
+                                        <span t-field="line.price_unit"/> <span t-field="o.currency_id.symbol"/>
+                                    </td>
+                                    <td style="border: 1px solid black; padding: 6px;">
+                                         <span t-if="line.tax_ids" t-esc="', '.join(map(lambda x: x.name, line.tax_ids))"/>
+                                        <span t-else="">TVA 0%</span>
+                                    </td>
+                                    <td style="border: 1px solid black; padding: 6px;">
+                                        <span t-field="line.quantity"/>
+                                    </td>
+                                    <td style="border: 1px solid black; padding: 6px;">
+                                        <span t-field="line.product_uom_id"/>
+                                    </td>
+                                    <td style="border: 1px solid black; padding: 6px;">
+                                        <span t-field="line.price_subtotal"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-8"></div>
+                    <div class="col-4">
+                        <table style="font-size:14px;width:100%;">
+                             <div style="border: 1px solid black; margin: 1px;width:100%;"></div>
+                            <br/>
+                            <tr>
+                                <td style="border: 1pt solid white;float: left;">Total hors-taxe :</td>
+                                <td style="border: 1pt solid white;float: right;">
+                                    <div class="text-nowrap">
+                                        <span t-esc="'{:,.2f}'.format(o.amount_untaxed).replace(',', ' ').replace('.', ',')"/>
+                                        <span t-field="o.currency_id.symbol"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <!-- Tax totals -->
+                            <t t-set="tax_totals" t-value="o.tax_totals"/>
+                            <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+                                <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
+                                <t t-foreach="tax_totals['groups_by_subtotal'][subtotal_to_show]" t-as="amount_by_group">
+                                    <tr style="border: 1pt solid white;">
+                                        <td>
+                                            <span class="text-nowrap" t-esc="amount_by_group['tax_group_name']"/>
+                                        </td>
+                                        <td class="text-end o_price_total">
+                                            <span class="text-nowrap" t-esc="amount_by_group['formatted_tax_group_amount']"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </table>
+
+                        <table style="font-size:14px;width:100%;">
+                            <div style="border: 1px solid black; margin: 1px;width:100%;"></div>
+                            <tr style="border: 1pt solid white;">
+                                <td class="text-nowrap" style="border: 1pt solid white;float: left;">
+                                    <strong>Total TTC :</strong>
+                                </td>
+                                <td style="border: 1pt solid white;float: right;">
+                                    <span t-esc="'{:,.2f}'.format(o.amount_total).replace(',', ' ').replace('.', ',')"/> <span t-field="o.currency_id.symbol"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <!-- Removed Timbre logic for simplicity with external_layout - Add back if needed -->
+
+                        <br/><br/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div>Arrêtée le Présente Facture à la Somme de :
+                            <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/> <!-- Use amount_to_text method -->
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <strong>Mode de paiement :</strong>
+                        <div>
+                            <t t-if="o.payment_mode == 'cheque'">► Cheque</t>
+                            <t t-elif="o.payment_mode == 'virement'">► Virement</t>
+                            <t t-elif="o.payment_mode == 'cash'">► Payé en espèces</t>
+                            <t t-else="">► Autre</t> <!-- Add a fallback -->
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <!-- Company Footer -->
+                <div class="footer mt-5" style="border-top: 2px solid black; padding-top: 15px; font-size: 12px;">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div>
+                                <strong><span t-field="o.company_id.name"/></strong>
+                                <t t-if="o.company_id.capital_social">
+                                    - Capital Social: <span t-field="o.company_id.capital_social"/> <span t-field="o.company_id.currency_id.symbol"/>
+                                </t>
+                            </div>
+                            <div class="mt-1">
+                                <t t-if="o.company_id.street"><span t-field="o.company_id.street"/></t>
+                                <t t-if="o.company_id.street2">, <span t-field="o.company_id.street2"/></t>
+                                <t t-if="o.company_id.city">, <span t-field="o.company_id.city"/></t>
+                                <t t-if="o.company_id.state_id">, <span t-field="o.company_id.state_id"/></t>
+                                <t t-if="o.company_id.zip">, <span t-field="o.company_id.zip"/></t>
+                                <t t-if="o.company_id.country_id">, <span t-field="o.company_id.country_id"/></t>
+                            </div>
+                            <div class="mt-1">
+                                <t t-if="o.company_id.phone">Tel: <span t-field="o.company_id.phone"/></t>
+                                <t t-if="o.company_id.fax"> - Fax: <span t-field="o.company_id.fax"/></t>
+                            </div>
+                            <div class="mt-1">
+                                <t t-if="o.company_id.nrc">RC: <span t-field="o.company_id.nrc"/></t>
+                                <t t-if="o.company_id.nif"> - NIF: <span t-field="o.company_id.nif"/></t>
+                                <t t-if="o.company_id.ai"> - AI: <span t-field="o.company_id.ai"/></t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </template>
+
+        <!-- Main Report Template using External Layout -->
+        <template id="report_invoice_pdr">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o"> <!-- Changed doc to o as per standard practice -->
+                    <t t-call="web.external_layout"> <!-- Use standard external layout -->
+                        <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/> <!-- Set language context -->
+                        <!-- Call the page content template -->
+                        <t t-call="kit_fiscal_dz.report_invoice_page_content"/>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <!-- Optional: Keep the original report_invoice_page if needed elsewhere, but rename it -->
+        <!-- <template id="report_invoice_page_original_standalone"> ... </template> -->
+
+    </data>
+</odoo>
+
+
+

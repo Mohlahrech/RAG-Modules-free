@@ -3,7 +3,7 @@
     <!-- Inherit the base template report_invoice_document -->
     <template id="custom_report_invoice_documendt" inherit_id="account.report_invoice_document">
 
-        <!-- Use XPath to locate the position to add your field -->
+        
         <xpath expr="//div[@class='mt-5']" position="before">
 
               <!--Ajouter les Données Fiscales du clients -->
